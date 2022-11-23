@@ -18,7 +18,6 @@ const user = {
     createDate: dataAtualFormatada(),
 }
 
-
 contas.push(user)
 return user
 }

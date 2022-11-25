@@ -1,21 +1,15 @@
 let contas = []
+const data = new Date();
+let dataAtualFormatada = data.toISOString().substring(0, 10);
 
 export function createUserCase(nome, email, senha) {
-
-    function dataAtualFormatada(){
-        var data = new Date(),
-            dia  = data.getDate().toString().padStart(2, '0'),
-            mes  = (data.getMonth()+1).toString().padStart(2, '0'),
-            ano  = data.getFullYear();
-        return dia+"/"+mes+"/"+ano;
-    }
 
 const user = {
     id: contas.length + 1,
     name: nome,
     email: email,
     password: senha,
-    createDate: dataAtualFormatada(),
+    createDate: dataAtualFormatada,
 }
 
 contas.push(user)

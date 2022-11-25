@@ -2,13 +2,13 @@
   "name": "account",
   "version": "1.0.0",
   "description": "",
-  "main": "createUserAccount.js",
+  "main": "src/use-case/createUserAccount.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/use-case/createUserAccount.js"
+    "start": "node test/createUserAccount.test.js"
     
   },
-  "author": "",
+  "author": "Thais Quirino",
   "license": "ISC"
 }

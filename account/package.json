@@ -5,10 +5,16 @@
   "main": "src/use-case/createUserAccount.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node test/createUserAccount.test.js"
-    
+    "start": "nodemon test/use-case/createUserAccount.test.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Thais Quirino",
-  "license": "ISC"
+  "keywords": [],
+  "author": "Wanderson M.",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "mongodb": "^4.12.1"
+  }
 }

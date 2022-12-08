@@ -2,9 +2,10 @@
   "name": "product",
   "version": "1.0.0",
   "description": "",
-  "main": "src/main.js",
+  "main": "src/test/use-case/createProductUseCase.js",
+  "type": "module",
   "scripts": {
-    "start": "node src/main.js",
+    "start": "node src/test/usecase/listProducts.test.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Thais Quirino",

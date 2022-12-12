@@ -2,12 +2,14 @@
   "name": "product",
   "version": "1.0.0",
   "description": "",
-  "main": "src/test/use-case/createProductUseCase.js",
+  "main": "src/usecase/createProductUseCase.js",
   "type": "module",
   "scripts": {
-    "start": "node src/test/usecase/listProducts.test.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node product/test/usecase/createProductUseCase.test.js"
   },
   "author": "Thais Quirino",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
 }

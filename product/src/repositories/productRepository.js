@@ -7,6 +7,5 @@ export async function saveProduct(produto) {    //função que recebe como param
 }
 
 export async function findProducts() {
-    const listProdutos = produtos
     return listProdutos;
 }

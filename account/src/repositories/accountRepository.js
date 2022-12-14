@@ -1,19 +1,14 @@
 import { MongoClient } from 'mongodb';
+async function saveAccountConnection() {
+    const connectionURL = 'mongodb://localhost:27017';
+    const connection = new MongoClient(connectionURL);
+    await connection.connect();
 
-const client = new MongoClient('mongodb://mongouser:mongopass@account_db:27017');
-const connection = new MongoClient(connectionURL);
+    const saveAccount = connection.db('accounts');
+    return saveAccount.collection('accountCollections');
 
-async function getUsersCollection(client) {
-    const db = client.db('accounts');
-    const usersCollection = db.collection('users');
-    return usersCollection;  
 }
-
-
 export async function saveAccount(account) {
-    await client.connect();
-    const usersCollection = await getUsersCollection(client);
-    await usersCollection.insertOne(account);
-   
+    const collection = await saveAccountConnection();
+    await collection.insertOne(account);
 }
-

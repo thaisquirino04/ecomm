@@ -1,15 +1,19 @@
-import { MongoClient } from 'mongodb'; // Importa a mongoClient do mongodb
+import { MongoClient } from 'mongodb';
 
-async function getAccountCollection() {                 // Cria função asyc getAccountCollection para Salvar a conta no mongodb
-    const connectionURL = 'mongodb://localhost:27017';  // Caminho para fazer a conexão com mongodb
-    const connection = new MongoClient(connectionURL);  // Faz a conexão com a URL informada.
-    await connection.connect();                         // Await faz a função async acontecer conectando mongoClient
+const client = new MongoClient('mongodb://mongouser:mongopass@account_db:27017');
+const connection = new MongoClient(connectionURL);
 
-    const saveAccountdb = connection.db('accountdb'); // Cria o nome do banco de dados
-    return saveAccountdb.collection('accountcollection'); // Cria o nome da collection
+async function getUsersCollection(client) {
+    const db = client.db('accounts');
+    const usersCollection = db.collection('users');
+    return usersCollection;  
 }
 
-export async function saveAccount(account) {        // Criando a função save Account
-    const collection = await getAccountCollection(); // Conecta o saveAccount
-    await collection.insertOne(account);          // Insere o arquivo dentro da collection 
+
+export async function saveAccount(account) {
+    await client.connect();
+    const usersCollection = await getUsersCollection(client);
+    await usersCollection.insertOne(account);
+   
 }
+

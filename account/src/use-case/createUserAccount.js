@@ -1,17 +1,15 @@
-import { saveAccount } from "../repositories/accountRepository.js"; // importa o accountRepositories para salvar a conta "saveAccount"
 
-export async function createUserCase(nome, email, senha) {   // função async = assicrona o que acontece por trás. E cria o createUserCase
 
-    const data = new Date();
-    const dataAtualFormatada =  data.toISOString().substring(0, 10); // gera a data de criação do registro em formato americano
+export async function createUserCase(name, email, password) {    //dados da conta para salvar
+    const createDate = new Date().toISOString().substring(0, 10);   // data criação da conta para salvar
 
-    const user = {   // const user parametros = dados a serem passados para conta
-        name: nome,
-        email: email,
-        password: senha,
-        createDate: dataAtualFormatada,
-    }
+    const user = {
+        name, 
+        email,
+        password,
+        createDate
+    };
 
-    saveAccount(user);  // Salva a conta com os parametros passados dento do "user"
-    return user
+    await saveAccount(user); //salvar e retornar a conta
+    return user; 
 }

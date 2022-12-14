@@ -2,18 +2,15 @@
   "name": "account",
   "version": "1.0.0",
   "description": "",
-  "main": "src/use-case/createUserAccount.js",
+  "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon test/use-case/createUserAccount.test.js",
+    "start": "node test/use-case/createUserAccount.test.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "Wanderson M.",
+  "author": "Thais Quirino",
   "license": "MIT",
-  "devDependencies": {
-    "nodemon": "^2.0.20"
-  },
   "dependencies": {
     "mongodb": "^4.12.1"
   }

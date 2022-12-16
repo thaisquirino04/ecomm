@@ -1,11 +1,9 @@
-const produtos = [] // Array global para salvar todos os produtos
-
-export async function saveProduct(produto) {    //função que recebe como parametro e insere no array função async pois futuramente será acessado no banco de dados.
-    produtos.push(produto)
-    return produtos
-
+const products = []
+export async function saveProduct(produto) {
+    products.push(produto)
+    return products
 }
-
-export async function findProducts() {
-    return listProdutos;
+export async function findProduct () {
+    const listProducts = products;
+    return listProducts;
 }

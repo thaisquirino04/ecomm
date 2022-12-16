@@ -1,11 +1,16 @@
 import { Router } from 'express';
 import { createUserCase } from './use-case/createUserAccount.js';
+import bcrypt from 'bcryptjs';
+
 export const router = new Router();
+
 router.post('/accounts', function(request, response) {
     const { name, email, password } = request.body;
-    createUserCase(name, email, password)
+    const encodedPassowrd = bcrypt.hashSync(password, 10);
+    console.log(encodedPassowrd)
+    createUserCase(name, email, encodedPassowrd)
         .then(createdAccount => {
-            delete createdAccount.password;
+            //delete createdAccount.password;
             response.status(201).json(createdAccount)
         })
         .catch(error => {

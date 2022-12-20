@@ -18,6 +18,6 @@ router.post('/products', function(request, response) {
             response.status(201).json(saveProduct)
         })
         .catch(error => {
-            response.status(400).json({ status: 'error', message: error.message });
+            response.status(500).json({ status: 'error', message: error.message });
         }); 
 });

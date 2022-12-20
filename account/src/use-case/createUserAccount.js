@@ -1,15 +1,18 @@
 import { saveAccount } from "../repositories/accountRepository.js";
+import  bcrypt from 'bcryptjs';
 
-export async function createUserCase(name, email, password) {    //dados da conta para salvar
-    const createDate = new Date().toISOString().substring(0, 10);   // data criação da conta para salvar
+export function createUserCase(name, email, password) {
+    
+    const createdDate = new Date().toISOString().substring(0,10);
+    const passHash = bcrypt.hashSync(password, 10);
 
     const user = {
-        name, 
-        email,
-        password,
-        createDate
+         name,
+         email,
+         password: passHash,
+         createdDate
     };
-
-    await saveAccount(user); //salvar e retornar a conta
-    return user; 
+    
+    saveAccount(user);
+    return user;
 }

@@ -1,7 +1,7 @@
 import { MongoClient } from 'mongodb';
 
 
-const connectionURL = 'mongodb://mongouser:1234@account-database:27017';
+const connectionURL = 'mongodb://mongouser:1234@localhost:27017';
 const connection = new MongoClient(connectionURL);
 async function getUsersCollection() {
     await connection.connect();

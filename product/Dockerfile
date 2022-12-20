@@ -1,12 +1,14 @@
-FROM node
+FROM node:18
 
 WORKDIR /app
 
-COPY package.json package-lock.json ./
+COPY package*.json /app/
 
 RUN npm install
 
 COPY . .
 
-ENTRYPOINT [ "npm start" ]
+EXPOSE 3001
+
+ENTRYPOINT npm start
 

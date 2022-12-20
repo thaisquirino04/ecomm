@@ -1,20 +1,22 @@
 version: "3"
 services:
-  mongo-database:
+  product:
+    image: pagonxt/product
+    build: product
+    ports:
+      - 3001:3000
+  account:
+    image: pagonxt/account
+    build: account
+    ports:
+      - 3000:3000
+  account-database:
     image: mongo
-    container_name: mongo-database
+    container_name: account-database
     restart: always
     environment:
       - MONGO_INITDB_ROOT_USERNAME=mongouser
       - MONGO_INITDB_ROOT_PASSWORD=1234
-      - MONGO_INITDB_DATABASE=accounts
+      - MONGO_INITDB_DATABASE=account
     ports:
-      - 27017:2701
-
-  product:
-    image: pagonxt/product
-    build: product
-
-  account:
-    image: pagonxt/account
-    build: account
+      - 27017:27017

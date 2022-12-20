@@ -2,16 +2,22 @@
   "name": "account",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/main.js",
   "type": "module",
   "scripts": {
-    "start": "node test/use-case/createUserAccount.test.js",
+    "dev": "nodemon src/main.js",
+    "start": "node src/main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "Thais Quirino",
   "license": "MIT",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.18.2",
     "mongodb": "^4.12.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
   }
 }

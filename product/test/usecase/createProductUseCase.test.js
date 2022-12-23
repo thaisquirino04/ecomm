@@ -1,10 +1,9 @@
 import { createProductUseCase } from "../../usecase/createProductUseCase.js";
 
 const produto = {
-    usuarioId: 'string',
     nome: 'Consórcio',
-    valor: 'R$ 500,00',
-    quantidade: '1',
+    valor: 500,
+    quantidade: 1,
     descricao: 'Mude de vida, saia do aluguel sem burocrácia',
     categoria: 'Consórcios',
     caracteristicas: [

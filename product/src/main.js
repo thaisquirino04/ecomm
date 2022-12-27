@@ -1,7 +1,7 @@
 import express from 'express';
 import { router } from './routes.js';
 import swaggerUI from "swagger-ui-express";
-import swaggerDocument from "./api-docs.json" assert {type: "json"}; ;
+import swaggerDocument from "./api-docs.json" assert {type: "json"};
 
 
 const app = express();

@@ -5,6 +5,16 @@ services:
     build: product
     ports:
       - 3001:3000
+  product_db:
+    image: mysql
+    container_name: product_db
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=true
+      - MYSQL_DATABASE=product
+      - MYSQL_USER=thais
+      - MYSQL_PASSWORD=040294
+    ports:
+      - 3307:3306
   account:
     image: pagonxt/account
     build: account

@@ -1,13 +1,13 @@
 import { Model, DataTypes } from 'sequelize';
 import client from '../../src/repositories/databaseClient.js';
 
-  export class Product extends Model {
+  export class Produtos extends Model {
 
     static associate(models) {
       // define association here
     }
   }
-  Product.init({
+  Produtos.init({
     nome: DataTypes.STRING,
     valor: DataTypes.DECIMAL,
     quantidade: DataTypes.INTEGER,
@@ -15,6 +15,5 @@ import client from '../../src/repositories/databaseClient.js';
     categoria: DataTypes.STRING,
     id_usuario: DataTypes.UUID
   }, 
-  { sequelize: client, modelName: 'Product'}
-  
-  );
+  { sequelize: client, modelName: 'Produtos' } 
+);

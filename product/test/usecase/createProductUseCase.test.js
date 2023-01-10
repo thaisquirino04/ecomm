@@ -1,6 +1,6 @@
 import { createProductUseCase } from "../../usecase/createProductUseCase.js";
 
-const produto = {
+export const produto = {
     nome: 'Consórcio',
     valor: 500,
     quantidade: 1,

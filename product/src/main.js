@@ -9,14 +9,13 @@ app.use(express.json());
 app.use(router);
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument))
 
-app.listen(3001, function () {
+app.listen(3000, function () {
     console.log('product server is running');
 
     client.authenticate()
     .then(() => {
-        console.log('Db connection OK!')
-    }).catch(e => {
-        console.log('Db connection Error:')
-    })
+        console.log('Db connection OK!') })
+    .catch(error => {
+        console.error(error)});
 
 });

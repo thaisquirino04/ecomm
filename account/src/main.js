@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(router);
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument))
 
-app.listen(3000, function () {
+app.listen(3001, function () {
     console.log('accounts server is running');
 
 });

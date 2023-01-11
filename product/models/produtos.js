@@ -1,5 +1,5 @@
 import { Model, DataTypes } from 'sequelize';
-import client from '../../src/repositories/databaseClient.js';
+import client from '../src/repositories/databaseClient.js';
 
   export class Produtos extends Model {
 

@@ -7,7 +7,7 @@ services:
     volumes:
       - ./product:/app
     ports:
-      - 3001:3000
+      - 3000:3000
   product_db:
     image: mysql
     container_name: product_db
@@ -25,7 +25,7 @@ services:
     volumes:
       - ./account:/app
     ports:
-      - 3000:3000
+      - 3001:3000
   account-database:
     image: mongo
     container_name: account-database

@@ -1,4 +1,4 @@
-import { Produtos } from '../../db/models/produtos.js';
+import { Produtos } from "../../models/produtos.js";
 
 export async function saveProduct(produto) {
     const criaProdutos = await Produtos.create(produto);
@@ -7,6 +7,5 @@ export async function saveProduct(produto) {
 }
 
 export async function findProduct () {
-    const allProduct = await Produtos.findAll();
-    return allProduct;
+    return [];
 }

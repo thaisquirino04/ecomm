@@ -15,7 +15,7 @@ module.exports = {
       descricao: {
         type: Sequelize.STRING
       },
-      id_produto: {
+      i_produto: {
         type: Sequelize.INTEGER
       },
       createdAt: {

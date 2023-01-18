@@ -1,6 +1,6 @@
-import { randomUUID } from 'crypto';
 import { saveAccount } from "../repositories/accountRepository.js";
 import  bcrypt from 'bcryptjs';
+import { randomUUID } from 'crypto';
 
 export async function createUserCase(name, email, password) {
     
@@ -9,13 +9,13 @@ export async function createUserCase(name, email, password) {
     const passHash = bcrypt.hashSync(password, 10);
 
     const user = {
-        id,
+         id,
          name,
          email,
          password: passHash,
          createdDate
     };
     
-    saveAccount(user);
+    await saveAccount(user);
     return user;
 }

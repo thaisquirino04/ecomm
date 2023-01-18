@@ -1,20 +1,17 @@
-import { MongoClient } from 'mongodb';
+import { MongoClient } from "mongodb";
 
+export const client = new MongoClient(process.env.DATABASE_URL);
 
-const connectionURL = 'mongodb://mongouser:1234@localhost:27017';
-const connection = new MongoClient(connectionURL);
-async function getUsersCollection() {
-    await connection.connect();
-    const database = connection.db('accounts')
-    return database.collection('users');
+export async function getUsersCollection(client) {
+    const db = client.db('accounts');
+    const usersCollection = db.collection('users');
+    return usersCollection;  
 }
-export async function saveAccount(account) {
-    try {
-        const collection = await getUsersCollection();
-        await collection.insertOne(account);
-    } catch (error) {
-        console.error("unsaved account =======", error.message.stack);
-    
-    }
 
+
+export async function saveAccount(account) {
+    await client.connect();
+    const usersCollection = await getUsersCollection(client);
+    await usersCollection.insertOne(account);
+    await client.close();
 }

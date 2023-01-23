@@ -6,14 +6,13 @@
   "type": "module",
   "scripts": {
     "start:dev": "env-cmd nodemon -e yaml,yml,js,json src/main.js",
-    "start": "node src/main.js",
-    "test": "env-cmd -f .env.test node --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles --verbose",
+    "start": "env-cmd node src/main.js",
+    "test": "env-cmd -f .env.test node --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles",
     "migrate": "npx sequelize-cli db:migrate"
   },
   "author": "Thais Quirino",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.20.1",
     "express": "^4.18.2",
     "mysql2": "^2.3.3",
     "sequelize": "^6.28.0",

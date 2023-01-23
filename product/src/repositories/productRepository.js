@@ -6,7 +6,7 @@ export async function saveProduct(produto) {
     const criaProdutos = await Produtos.create(produto, {
         include: [
         { association: Produtos.ProdutoCaracteristica, as: 'caracteristicas', },
-        { association: Produtos.ProdutoImagem, as: 'imagens'}
+        { association: Produtos.ProdutoImagem, as: 'imagems'}
     ]
     });
     await criaProdutos.save();
@@ -20,7 +20,7 @@ export async function findProduct () {
             as: 'caracteristicas'
         }, {
             model: ProdutoImagem,
-            as: 'imagens'
+            as: 'imagems'
         }]
     });
     return allProdutos;

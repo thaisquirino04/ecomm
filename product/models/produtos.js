@@ -22,7 +22,7 @@ import { ProdutoImagem } from './produtoimagem.js';
 
 Produtos.ProdutoImagem = Produtos.hasMany(ProdutoImagem, {
   foreignKey: 'id_produto',
-  as: 'imagens'
+  as: 'imagems'
 });
 
 Produtos.ProdutoCaracteristica = Produtos.hasMany(ProdutoCaracteristica, {

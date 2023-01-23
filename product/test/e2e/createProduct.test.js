@@ -1,11 +1,13 @@
 import request from 'supertest';
 import { app } from '../../src/app.js';
 import { productExample } from '../data/products.js';
-import client from '../../src/repositories/databaseClient.js';
+import { cleanProductTable } from "../helpers/help-product.js";
+
 
 describe('Criação de produto', () => { 
-    afterAll(async() => {
-        await client.close();
+
+    afterEach(async () => {
+        await cleanProductTable();
       });
 
     it('Cria novo produto', async () => {
@@ -28,7 +30,7 @@ describe('Criação de produto', () => {
                         createdAt: expect.any(String),
                         updatedAt: expect.any(String),
                     })),
-                    imagens: productExample.imagens.map((imagem) => ({
+                    imagems: productExample.imagems.map((imagem) => ({
                         ...imagem, 
                         id: expect.any(Number),
                         id_produto: body.id,

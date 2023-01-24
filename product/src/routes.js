@@ -25,8 +25,6 @@ router.post('/products', async (request, response) => {
         return response.status(403).json({ message: 'forbidden' });
     }
 
-
-
     const produto = request.body;
     const criaProdutos = await createProductUseCase(produto, userId);
     

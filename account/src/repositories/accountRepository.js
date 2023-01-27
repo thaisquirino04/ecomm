@@ -23,3 +23,8 @@ export async function findUserByEmail(email) {
     await client.close();
     return user;
 }
+
+export async function existsAccountByEmail(email) {
+    const user = await findUserByEmail(email);
+    return user !== null;
+}

@@ -6,7 +6,7 @@ import { app } from './app.js';
 
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument))
 
-app.listen(3000, function () {
+app.listen(process.env.PORT_LISTEN, function () {
     console.log('product server is running');
 
     client.authenticate()

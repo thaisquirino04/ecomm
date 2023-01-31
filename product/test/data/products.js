@@ -1,7 +1,4 @@
-import { randomUUID } from 'crypto';
-
 export const productExample = {
-    id_usuario: randomUUID(),
     nome: 'Consórcio',
     valor: "500",
     quantidade: 1,

@@ -1,7 +1,7 @@
 import { createProductUseCase } from './usecase/createProductUseCase.js';
 import { Router } from 'express';
 import { listProducts } from './usecase/listProduct.js';
-import { decriptToken } from '../test/helpers/token.js';
+import { decriptToken } from './helpers/token.js';
 
 const router = Router();
 

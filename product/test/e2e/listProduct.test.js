@@ -29,7 +29,7 @@ describe('Lista produtos', () => {
             expect(body).toEqual(expect.arrayContaining([{
                     ...productExample,
                     id_usuario: 'id-do-usuario',
-                    value: String(productExample.value),
+                    valor: String(productExample.valor),
                     id: expect.any(Number),
                     createdAt: expect.any(String),
                     updatedAt: expect.any(String),

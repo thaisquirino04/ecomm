@@ -26,12 +26,12 @@ describe('Account Creation', () => {
     });
 
     it('should not generate a token given incorrect password account', async () => {
-        await createUserUseCase('Carolina', 'lina@pagonxt.com', 'senhafácil');
+        await createUserUseCase('Pablo', 'pablo@mail.com', '5678');
         await request(app)
             .post('/tokens')
             .set('Content-Type', 'application/json')
             .set('Accetp', 'application/json')
-            .send({ email: 'pablo@mail.com', password: '56789' })
+            .send({ email: 'pablo@mail.com', password: '567899' })
             .expect(401)
             .expect(({ body }) => {
                 expect(body).toEqual({ message: 'user e-mail or password incorrect' });
@@ -44,7 +44,7 @@ describe('Account Creation', () => {
             .post('/tokens')
             .set('Content-Type', 'application/json')
             .set('Accetp', 'application/json')
-            .send({ email: 'pablom@mail.com', password: '5678' })
+            .send({ email: 'pablom@maill.com', password: '5678' })
             .expect(401)
             .expect(({ body }) => {
                 expect(body).toEqual({ message: 'user e-mail or password incorrect' });

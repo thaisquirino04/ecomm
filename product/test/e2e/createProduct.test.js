@@ -2,7 +2,7 @@ import request from 'supertest';
 import { app } from '../../src/app.js';
 import { productExample } from '../data/products.js';
 import { cleanProductTable } from "../helpers/help-product.js";
-import { generateToken } from '../helpers/token.js';
+import { generateToken } from "../helpers/token.js";
 
 
 describe('Criação de produto', () => {
@@ -71,7 +71,7 @@ it('não deve criar um produto quando as informações de autorização são mal
 });
 
 it('não deve criar um produto quando as informações de autorização foram modificadas', async () => {
-    const modifiedToken = generateToken('id-do-usuario') + 'a';
+    const modifiedToken = generateToken('id-usuario') + 'a';
     await request(app)
         .post('/products')
         .set('Content-Type', 'application/json')

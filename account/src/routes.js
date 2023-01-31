@@ -2,15 +2,18 @@ import { Router } from 'express';
 import { createUserCase } from './use-case/createUserAccount.js';
 
 
-export const router = new Router();
+const router = Router();
 
-router.post('/accounts', function(request, response) {
+router.post('/accounts', async (request, response) => {
     const { name, email, password } = request.body;
-    createUserCase(name, email, password)
-        .then(createdAccount => {
-         response.status(201).json(createdAccount)
-        })
-        .catch(error => {
-            response.status(400).json({ status: 'error', message: error.message });
-        }); 
+    const createdUser = await createUserCase(name, email, password);
+
+    return response.status(201).json({
+        id: createdUser.id,
+        name: createdUser.name,
+        email: createdUser.email,
+        createdDate: createdUser.createdDate,
+    });
 });
+
+export { router };

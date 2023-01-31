@@ -15,4 +15,3 @@ import client from '../src/repositories/databaseClient.js';
     sequelize: client,
     modelName: 'ProdutoImagem',
   });
- 

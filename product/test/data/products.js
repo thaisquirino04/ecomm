@@ -1,8 +1,10 @@
+import { randomUUID } from 'node:crypto';
+
 export const productExample = {
     nome: 'Consórcio',
     valor: "500",
     quantidade: 1,
-    descricao: 'Mude de vida, saia do aluguel sem burocrácia',
+    descricao: 'Consórcio é a modalidade de compra baseada na união de pessoas - físicas ou jurídicas - em grupos, com a finalidade de formar poupança para a aquisição de bens móveis, imóveis ou serviços. A formação desses grupos é feita por uma Administradora de Consórcios , autorizada e fiscalizada pelo Banco Central do Brasil. Mude de vida já',
     categoria: 'Consórcios',
     caracteristicas: [
         {

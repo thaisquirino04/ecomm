@@ -1,261 +1,268 @@
 {
-    "openapi": "3.0.1",
-    "info": {
-      "version": "1.0.0",
-      "title": "API Product",
-      "description": "Esta é uma api para manipulação de produtos do eccomerce",
-      "contact": {
-        "name": "Dev Contato",
-        "email": "thais.quirino@pagonxt.com"
-      }
-    },
-    "servers": [
-      {
-        "url": "http://localhost:3000",
-        "description": "API de teste"
-      }
-    ],
-    "paths": {
-      "/products": {
-        "summary": "Cadastro de produtos",
-        "description": "Essa rota será responsável por cadastrar um novo produto",
-        "post": {
-          "security": [
-            {
-              "bearerAuth": [
-  
-              ]
+  "openapi": "3.0.1",
+  "info": {
+    "version": "1.0.0",
+    "title": "API Product",
+    "description": "Esta é uma api para manipulação de produtos do eccomerce",
+    "contact": {
+      "name": "Dev Contato",
+      "email": "thais.quirino@pagonxt.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "API de teste"
+    }
+  ],
+  "paths": {
+    "/products": {
+      "summary": "Cadastro de produtos",
+      "description": "Essa rota será responsável por cadastrar um novo produto",
+      "post": {
+        "security": [
+          {
+            "bearerAuth": [
+
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProdutosRequest"
+              }
             }
-          ],
-          "requestBody": {
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Produto criado",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CreateProdutosRequest"
+                  "$ref": "#/components/schemas/ProdutosResponse"
                 }
               }
             }
           },
-          "responses": {
-            "201": {
-              "description": "Produto criado",
-              "content": {
-                "application/json": {
-                  "schema": {
+          "400": {
+            "description": "Produto não criado devido a problemas de validação",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "property": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Solicitação negada devido a problemas de autorização",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Solicitação negada devido a problemas de autorização",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Retornar uma lista de produtos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
                     "$ref": "#/components/schemas/ProdutosResponse"
                   }
                 }
               }
-            },
-            "400": {
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "message": {
-                        "type": "string"
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "401": {
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "message": {
-                        "type": "string"
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "403": {
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "message": {
-                        "type": "string"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "get": {
-          "responses": {
-            "200": {
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/ProdutosResponse"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "components": {
-      "securitySchemes": {
-        "bearerAuth": {
-          "type": "http",
-          "scheme": "bearer",
-          "bearerFormat": "JWT"
-        }
-      },
-      "schemas": {
-        "ImagemResponse": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "integer"
-            },
-            "url": {
-              "type": "string"
-            },
-            "descricao": {
-              "type": "string"
-            },
-            "createdDate": {
-              "type": "string"
-            },
-            "updatedDate": {
-              "type": "string"
-            }
-          }
-        },
-        "CaracteristicaResponse": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "integer"
-            },
-            "nome": {
-              "type": "string"
-            },
-            "descricao": {
-              "type": "string"
-            },
-            "createdDate": {
-              "type": "string"
-            },
-            "updatedDate": {
-              "type": "string"
-            }
-          }
-        },
-        "ProdutosResponse": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "integer"
-            },
-            "id_usuario": {
-              "type": "string"
-            },
-            "nome": {
-              "type": "string"
-            },
-            "descricao": {
-              "type": "string"
-            },
-            "categoria": {
-              "type": "string"
-            },
-            "quantidade": {
-              "type": "integer"
-            },
-            "valor": {
-              "type": "number"
-            },
-            "createdDate": {
-              "type": "string"
-            },
-            "updatedDate": {
-              "type": "string"
-            },
-            "caracteristicas": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/CaracteristicaResponse"
-              }
-            },
-            "imagems": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/ImagemResponse"
-              }
-            }
-          }
-        },
-        "CreateProdutosRequest": {
-          "type": "object",
-          "properties": {
-            "nome": {
-              "type": "string"
-            },
-            "descricao": {
-              "type": "string"
-            },
-            "categoria": {
-              "type": "string"
-            },
-            "quantidade": {
-              "type": "integer"
-            },
-            "valor": {
-              "type": "number"
-            },
-            "caracteristicas": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/CreateCaracteristicaRequest"
-              }
-            },
-            "imagems": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/CreateImagemRequest"
-              }
-            }
-          }
-        },
-        "CreateImagemRequest": {
-          "type": "object",
-          "properties": {
-            "url": {
-              "type": "string"
-            },
-            "descricao": {
-              "type": "string"
-            }
-          }
-        },
-        "CreateCaracteristicaRequest": {
-          "type": "object",
-          "properties": {
-            "nome": {
-              "type": "string"
-            },
-            "descricao": {
-              "type": "string"
             }
           }
         }
       }
     }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "ImagemResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "url": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string"
+          },
+          "createdDate": {
+            "type": "string"
+          },
+          "updatedDate": {
+            "type": "string"
+          }
+        }
+      },
+      "CaracteristicaResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string"
+          },
+          "createdDate": {
+            "type": "string"
+          },
+          "updatedDate": {
+            "type": "string"
+          }
+        }
+      },
+      "ProdutosResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "id_usuario": {
+            "type": "string"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string"
+          },
+          "categoria": {
+            "type": "string"
+          },
+          "quantidade": {
+            "type": "integer"
+          },
+          "valor": {
+            "type": "number"
+          },
+          "createdDate": {
+            "type": "string"
+          },
+          "updatedDate": {
+            "type": "string"
+          },
+          "caracteristicas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CaracteristicaResponse"
+            }
+          },
+          "imagems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ImagemResponse"
+            }
+          }
+        }
+      },
+      "CreateProdutosRequest": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string"
+          },
+          "categoria": {
+            "type": "string"
+          },
+          "quantidade": {
+            "type": "integer"
+          },
+          "valor": {
+            "type": "number"
+          },
+          "caracteristicas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateCaracteristicaRequest"
+            }
+          },
+          "imagems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateImagemRequest"
+            }
+          }
+        }
+      },
+      "CreateImagemRequest": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateCaracteristicaRequest": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string"
+          }
+        }
+      }
+    }
   }
+}

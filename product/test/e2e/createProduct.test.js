@@ -83,4 +83,22 @@ it('não deve criar um produto quando as informações de autorização foram mo
         });
 });
 
+it('não deve criar um produto quando o id do usuário não é válido', async () => {
+    await request(app)
+        .post('/products')
+        .set('Content-Type', 'application/json')
+        .set('Accept', 'application/json')
+        .set('Authorization', `Bearer ${generateToken(randomUUID())}`)
+        .send({...productExample, descricao: '' })
+        .expect(400)
+        .expect(({ body }) => {
+            expect(body).toEqual([
+                {
+                    property: 'description',
+                    message: expect.any(String)
+                }
+            ]);
+        });
+});
+
 

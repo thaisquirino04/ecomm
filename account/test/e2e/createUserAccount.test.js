@@ -21,7 +21,7 @@ describe('Account Creation', () => {
             .send({
                 name: 'Laura',
                 email: 'laura@mail.com',
-                password: '080114'
+                password: '08012014'
             })
             .expect(201)
             .expect(({ body }) => {
@@ -44,12 +44,33 @@ it('should not create an user given an already used e-mail', async () => {
         .send({
             name: 'Thais',
             email: 'thais@mail.com',
-            password: '1234'
+            password: '08012014'
         })
         .expect(400)
         .expect(({ body }) => {
             expect(body).toEqual({
                 message: 'User already registered'
             })
+        });
+});
+
+it('should not create an user given invalid e-mail', async () => {
+    await request(app)
+        .post('/accounts')
+        .set('Content-Type', 'application/json')
+        .set('Accept', 'application/json')
+        .send({
+            name: 'Thais',
+            email: 'thaismail.com',
+            password: '08012014'
+        })
+        .expect(400)
+        .expect(({ body }) => {
+            expect(body).toEqual(expect.arrayContaining([
+                {
+                    message: expect.any(String),
+                    property: 'email'
+                }
+            ]))
         });
 });

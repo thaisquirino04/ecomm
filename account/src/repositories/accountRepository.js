@@ -23,3 +23,8 @@ export async function findUserByEmail(email) {
     await client.close();
     return user;
 }
+
+export async function existsByEmail(email) {
+    const possibleUser = await findUserByEmail(email);
+    return !!possibleUser;
+}

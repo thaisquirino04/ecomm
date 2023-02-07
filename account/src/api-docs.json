@@ -1,86 +1,152 @@
 {
-    "openapi": "3.0.3",
+    "openapi": "3.0.1",
     "info": {
-        "title": "API Account",
-        "description": "Esta é uma api para manipulação de contas de usuários do ecomm.",
-        "contact": {
-            "email": "thais.quirino@pagonxt.com"
-        },
-        "version": "1.0.0"
+      "version": "1.0.0",
+      "title": "API Account",
+      "description": "Esta é uma api para manipulação de contas de usuários do ecomm",
+      "contact": {
+        "name": "Dev Contato",
+        "email": "thais.quirino@pagonxt.com"
+      }
     },
     "servers": [
-        {
-            "url": "http://localhost:3001",
-            "description": "API de teste"
-        }
+      {
+        "url": "http://localhost:3001",
+        "description": "API de teste"
+      }
     ],
     "paths": {
-        "/accounts": {
-            "post": {
-                "tags": [
-                    "Account"
-                ],
-                "summary": "Cadastro de conta",
-                "description": "Essa rota será responsável por cadastrar uma nova conta",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Account"
-                            },
-                            "examples": {
-                                "account": {
-                                    "value": {
-                                        "name": "Thais",
-                                        "email": "thais@gmail.com",
-                                        "password": "080114"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "400": {
-                        "description": "Error creating user!"
-                    },
-                    "201": {
-                        "description": "Created",
-                        "content": {
-                            "application/json": {
-                                "examples": {
-                                    "account": {
-                                        "value": {
-                                            "id": "2235c7ce-7092-447d-851a-ec156a579af1",
-                                            "name": "Thais",
-                                            "email": "thais@gmail.com",
-                                            "date": "2022-12-22"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+      "/accounts": {
+        "summary": "Cadastro de conta",
+        "description": "Essa rota será responsável por cadastrar uma nova conta",
+        "post": {
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateAccountRequest"
                 }
+              }
             }
+          },
+          "responses": {
+            "201": {
+              "description": "Conta criada",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/AccountResponse"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Conta não criada",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
-    },
-    "components": {
-        "schemas": {
-            "Account": {
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string"
-                    },
+      },
+      "/tokens": {
+        "summary": "cria um token de conta",
+        "description": "Dado e-mail e senha, cria um token de conta",
+        "post": {
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
                     "email": {
-                        "type": "string"
+                      "type": "string"
                     },
                     "password": {
-                        "type": "string"
+                      "type": "string"
                     }
+                  }
                 }
+              }
             }
+          },
+          "responses": {
+            "201": {
+              "description": "Conta de token criada",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "token": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Erro com dados da conta",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
+      }
+    },
+    "components": {
+      "schemas": {
+        "CreateAccountRequest": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "password": {
+              "type": "string"
+            }
+          }
+        },
+        "AccountResponse": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "createdDate": {
+              "type": "string"
+            }
+          }
+        }
+      }
     }
-}
+  }

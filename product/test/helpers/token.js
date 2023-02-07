@@ -1,13 +1,9 @@
-import jwt from 'jsonwebtoken';
+import jwt from "jsonwebtoken";
 
-export function decriptToken(token) {
-    try {
-        const tokenSecret = process.env.TOKEN_SECRET;
-        const { userId } = jwt.verify(token, tokenSecret);
-    
-        return { userId };
-    } catch (error) {
-        console.log('error when verifying token', error.message);
-        return {};
-    }
+export function generateToken(id, expiration = 14400) {
+  const tokenSecret = process.env.TOKEN_SECRET;
+  const token = jwt.sign({ userId: id }, tokenSecret, {
+    expiresIn: `${expiration}s`,
+  });
+  return token;
 }

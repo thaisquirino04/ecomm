@@ -4,6 +4,7 @@ import { productExample } from "../data/products.js";
 import { cleanProductTable } from "../helpers/help-product.js";
 import { saveProduct } from "../../src/repositories/productRepository.js";
 
+
 describe('Lista produtos', () => {
 
   afterEach(async () => {
@@ -19,31 +20,34 @@ describe('Lista produtos', () => {
   })
 
   it('Deve retornar uma lista de produtos', async () => {
-      await saveProduct(productExample)
-      await request(app)
-      .get('/products')
-      .expect(200)
-      .expect(({body}) => {
-          expect(body).toEqual([{
-              ...productExample,
-              id: expect.any(Number),
-              createdAt: expect.any(String),
-              updatedAt: expect.any(String),
-              caracteristicas: productExample.caracteristicas.map(caracteristica => ({
-                  ...caracteristica,
-                  createdAt: expect.any(String),
-                  id_produto: body[0].id,
-                  updatedAt: expect.any(String),
-                  id: expect.any(Number),
-              })),
-              imagems: productExample.imagems.map(imagem => ({
-                  ...imagem,
-                  createdAt: expect.any(String),
-                  id: body[0].id,
-                  id_produto: expect.any(Number),
-                  updatedAt: expect.any(String)
-              }))
-          }])
-      })
-  })
-})
+    await saveProduct({...productExample, id_usuario: 'id-do-usuario'});
+    await request(app)
+        .get('/products')
+        .expect(200)
+        .expect(({ body }) => {
+            expect(body.length).toBe(1);
+            expect(body).toEqual(expect.arrayContaining([{
+                    ...productExample,
+                    id_usuario: 'id-do-usuario',
+                    valor: String(productExample.valor),
+                    id: expect.any(Number),
+                    createdAt: expect.any(String),
+                    updatedAt: expect.any(String),
+                    caracteristicas: expect.arrayContaining(productExample.caracteristicas.map(caracteristica => ({
+                        ...caracteristica, 
+                        id: expect.any(Number),
+                        id_produto: body[0].id,
+                        createdAt: expect.any(String),
+                        updatedAt: expect.any(String),
+                    }))),
+                    imagems: expect.arrayContaining(productExample.imagems.map(imagem => ({
+                        ...imagem, 
+                        id: expect.any(Number),
+                        id_produto: body[0].id,
+                        createdAt: expect.any(String),
+                        updatedAt: expect.any(String),
+                    })))
+                }]));
+        });
+});
+});

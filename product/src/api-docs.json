@@ -1,185 +1,268 @@
 {
-    "openapi": "3.0.3",
-    "info": {
-        "title": "API Product",
-        "description": "Esta é uma api para manipulação de produtos do eccomerce.",
-        "contact": {
-            "email": "thais.quirino@pagonxt.com"
-        },
-        "version": "1.0.0"
-    },
-    "servers": [
-        {
-            "url": "http://localhost:3000",
-            "description": "API de teste"
-        }
-    ],
-    "paths": {
-        "/products": {
-            "post":{
-                 "tags": [
-                    "Product"
-                ],
-                "summary": "Cadastro de produtos",
-                "description": "Essa rota será responsável por cadastrar um novo produto",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Product"
-                            },
-                            "examples": {
-                                "product": {
-                                    "value": {
-                                        "produto": {
-                                            "nome": "Consórcio",
-                                            "valor": 500,
-                                            "quantidade": 1,
-                                            "descricao": "Mude de vida, saia do aluguel sem burocrácia",
-                                            "categoria": "Consórcios",
-                                            "caracteristicas": [
-                                                {
-                                                    "nome": "Produto bancário",
-                                                    "descricao": "Consórcio"
-                                                }
-                                            ],
-                                            "imagens": [
-                                                {
-                                                    "url": "https://www.canva.com/design/DAFT_oaKJpc/view'",
-                                                    "descricao": "Imagem Consórcio"
-                                                }
-                                            ]
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "400": {
-                        "description": "Error creating product!"
-                    },
-                    "201": {
-                        "description": "Created",
-                        "content": {
-                            "application/json": {
-                                "examples": {
-                                    "products": {
-                                        "value": {
-                                            "id": "6d607f6a-3625-45df-884a-d2a479680393",
-                                            "createdDate": "2022-12-22",
-                                            "produto": {
-                                                "nome": "Consórcio",
-                                                "valor": 500,
-                                                "quantidade": 1,
-                                                "descricao": "Mude de vida, saia do aluguel sem burocrácia",
-                                                "categoria": "Consórcios",
-                                                "caracteristicas": [
-                                                    {
-                                                        "nome": "Produto bancário",
-                                                        "descricao": "Consórcio"
-                                                    }
-                                                ],
-                                                "imagens": [
-                                                    {
-                                                        "url": "https://www.canva.com/design/DAFT_oaKJpc/view",
-                                                        "descricao": "Imagem Consórcio"
-                                                    }
-                                                ]
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "get": {
-                "tags": [
-                    "Product"
-                ],
-                "summary": "lista de produtos cadastrados",
-                "description": "Essa rota será responsável por listar os produtos cadastrados",
-                "responses": {
-                    "500": {
-                        "description": "Error fetching products!"
-                    },
-                    "200": {
-                        "description": "success",
-                        "content": {
-                            "application/json": {
-                                "examples": {
-                                    "products": {
-                                        "value": {
-                                            "id": "6d607f6a-3625-45df-884a-d2a479680393",
-                                            "createdDate": "2022-12-22",
-                                            "produto": {
-                                                "nome": "Consórcio",
-                                                "valor": 500,
-                                                "quantidade": 1,
-                                                "descricao": "Mude de vida, saia do aluguel sem burocrácia",
-                                                "categoria": "Consórcios",
-                                                "caracteristicas": [
-                                                    {
-                                                        "nome": "Produto bancário",
-                                                        "descricao": "Consórcio"
-                                                    }
-                                                ],
-                                                "imagens": [
-                                                    {
-                                                        "url": "https://www.canva.com/design/DAFT_oaKJpc/view",
-                                                        "descricao": "Imagem Consórcio"
-                                                    }
-                                                ]
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    },
-    "components": {
-        "schemas": {
-            "Product": {
-                "type": "object",
-                "properties": {
-                    "nome": {
-                        "type": "string"
-                    },
-                    "valor": {
-                        "type": "double"
-                    },
-                    "quantidade": {
-                        "type": "number"
-                    },
-                    "descricao": {
-                        "type": "string"
-                    },
-                    "categoria": {
-                        "type": "string"
-                    },
-                    "caracteristicas": {
-                        "type": "array",
-                        "items": {
-                            "nome": "string",
-                            "descricao": "string"
-                        }
-                    },
-                    "imagens": {
-                        "type": "array",
-                        "items": {
-                            "url": "string",
-                            "descricao": "string"
-                        }
-                    }
-                }
-            }
-        }
+  "openapi": "3.0.1",
+  "info": {
+    "version": "1.0.0",
+    "title": "API Product",
+    "description": "Esta é uma api para manipulação de produtos do eccomerce",
+    "contact": {
+      "name": "Dev Contato",
+      "email": "thais.quirino@pagonxt.com"
     }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "API de teste"
+    }
+  ],
+  "paths": {
+    "/products": {
+      "summary": "Cadastro de produtos",
+      "description": "Essa rota será responsável por cadastrar um novo produto",
+      "post": {
+        "security": [
+          {
+            "bearerAuth": [
+
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProdutosRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Produto criado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProdutosResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Produto não criado devido a problemas de validação",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "property": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Solicitação negada devido a problemas de autorização",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Solicitação negada devido a problemas de autorização",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Retornar uma lista de produtos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProdutosResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "ImagemResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "url": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string"
+          },
+          "createdDate": {
+            "type": "string"
+          },
+          "updatedDate": {
+            "type": "string"
+          }
+        }
+      },
+      "CaracteristicaResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string"
+          },
+          "createdDate": {
+            "type": "string"
+          },
+          "updatedDate": {
+            "type": "string"
+          }
+        }
+      },
+      "ProdutosResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "id_usuario": {
+            "type": "string"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string"
+          },
+          "categoria": {
+            "type": "string"
+          },
+          "quantidade": {
+            "type": "integer"
+          },
+          "valor": {
+            "type": "number"
+          },
+          "createdDate": {
+            "type": "string"
+          },
+          "updatedDate": {
+            "type": "string"
+          },
+          "caracteristicas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CaracteristicaResponse"
+            }
+          },
+          "imagems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ImagemResponse"
+            }
+          }
+        }
+      },
+      "CreateProdutosRequest": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string"
+          },
+          "categoria": {
+            "type": "string"
+          },
+          "quantidade": {
+            "type": "integer"
+          },
+          "valor": {
+            "type": "number"
+          },
+          "caracteristicas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateCaracteristicaRequest"
+            }
+          },
+          "imagems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CreateImagemRequest"
+            }
+          }
+        }
+      },
+      "CreateImagemRequest": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateCaracteristicaRequest": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
 }

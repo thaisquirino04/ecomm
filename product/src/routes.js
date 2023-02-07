@@ -1,7 +1,8 @@
 import { createProductUseCase } from './usecase/createProductUseCase.js';
 import { Router } from 'express';
 import { listProducts } from './usecase/listProduct.js';
-import { decriptToken } from '../test/helpers/token.js';
+import { decriptToken } from './helpers/token.js';
+import { randomUUID } from 'node:crypto';
 
 const router = Router();
 
@@ -15,7 +16,7 @@ router.post('/products', async (request, response) => {
     const token = authotizationHeader.split(' ')[1];
 
     if(!token) {
-        return response.status(400).json({ message: 'authorization header malformad' });
+        return response.status(401).json({ message: 'authorization header malformad' });
     }
 
     const tokenDecripted = decriptToken(token);
@@ -25,11 +26,16 @@ router.post('/products', async (request, response) => {
         return response.status(403).json({ message: 'forbidden' });
     }
 
-    const produto = request.body;
-    const criaProdutos = await createProductUseCase(produto, userId);
+    const criaProduto = request.body;
+    const { hasErrors, errors, produto } = await createProductUseCase(criaProduto, userId);
+
     
-    return response.status(201).json(criaProdutos);
-    
+    if(hasErrors) {
+        return response.status(400).json(errors);
+    }
+
+    return response.status(201).json(produto);
+
 });
 
 router.get('/products', async (request, response) => {
